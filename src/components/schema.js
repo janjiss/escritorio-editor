@@ -1,18 +1,25 @@
+import React from 'react';
+import transformations from './schemaRules';
+
 const schema = {
 	nodes: {
 		paragraph: props => {
-			<p {...props.attributes}>
-				{props.children}
-			</p>;
+			return (
+				<p {...props.attributes}>
+					{props.children}
+				</p>
+			);
 		},
 		title: props => {
-			<h1 {...props.attributes}>
-				{props.children}
-			</h1>;
+			return (
+				<h1 {...props.attributes}>
+					{props.children}
+				</h1>
+			);
 		}
 	},
 	marks: [],
-	rules: []
+	rules: transformations
 };
 
 export default schema;
