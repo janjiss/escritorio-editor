@@ -2,8 +2,8 @@ import insertAtLeastOneParagraph from './insertAtLeastOneParagraph';
 import removeAllTitleBlocksExceptFirst from './removeAllTitleBlocksExceptFirst';
 import transformFirstLineToTitle from './transformFirstLineToTitle';
 
-export default {
+export default [
 	insertAtLeastOneParagraph,
 	removeAllTitleBlocksExceptFirst,
 	transformFirstLineToTitle
-};
+];

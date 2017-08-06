@@ -1,4 +1,4 @@
-import { Transform } from 'slate';
+import { Block } from 'slate';
 
 export default {
 	match: node => node.kind === 'document',
