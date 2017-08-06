@@ -9,7 +9,9 @@ import transformations from '../';
 const transformationNames = [
 	'transformFirstLineToTitle',
 	'removeAllTitleBlocksExceptFirst',
-	'insertAtLeastOneParagraph'
+	'insertAtLeastOneParagraph',
+	'titleCanNotHaveMarks',
+	'titleCanNotHaveInlines'
 ];
 
 describe('schema rules', async () => {

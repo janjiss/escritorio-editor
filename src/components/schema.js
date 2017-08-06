@@ -57,6 +57,14 @@ const schema = {
 					{props.children}
 				</ol>
 			);
+		},
+		link: props => {
+			const { data } = props.node;
+			return (
+				<a {...props.attributes} href={data.get('href')}>
+					{props.children}
+				</a>
+			);
 		}
 	},
 	marks: {
