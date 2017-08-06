@@ -3,11 +3,13 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
+		"fs-promise": "^2.0.3",
 		"react": "^15.6.1",
 		"react-dom": "^15.6.1",
 		"react-scripts": "1.0.10",
 		"read-yaml-promise": "^1.0.2",
-		"slate": "^0.21.1"
+		"slate": "^0.21.1",
+		"to-camel-case": "^1.0.0"
 	},
 	"scripts": {
 		"start": "react-scripts start",
