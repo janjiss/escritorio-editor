@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Editor, Raw } from 'slate';
 import './App.css';
 import schema from './schema';
+import Menu from './Menu';
+import StateChanges from './StateChanges';
 
 const initialState = Raw.deserialize(
 	{
@@ -22,6 +24,11 @@ const initialState = Raw.deserialize(
 );
 
 class App extends Component {
+	constructor(props) {
+		super(props);
+		this.stateChanges = new StateChanges({ getState: this.getState });
+	}
+
 	state = {
 		state: initialState
 	};
@@ -30,10 +37,14 @@ class App extends Component {
 		this.setState({ state });
 	};
 
+	getState = () => {
+		return this.state.state;
+	};
+
 	render() {
 		return (
 			<div id="editor">
-				<div>Menu</div>
+				<Menu stateChanges={this.stateChanges} />
 				<Editor
 					placeholder="Start typing"
 					schema={schema}
