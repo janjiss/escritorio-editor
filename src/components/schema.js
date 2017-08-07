@@ -1,5 +1,6 @@
 import React from 'react';
 import transformations from './schemaRules';
+
 const schema = {
 	nodes: {
 		paragraph: props => {
@@ -44,7 +45,7 @@ const schema = {
 				</li>
 			);
 		},
-		unorderedLIst: props => {
+		unorderedList: props => {
 			return (
 				<ul {...props.attributes}>
 					{props.children}
