@@ -2,7 +2,6 @@ import readYaml from 'read-yaml-promise';
 import { resolve } from 'path';
 import { Schema, Raw } from 'slate';
 import fs from 'fs-promise';
-import toCamel from 'to-camel-case';
 import schema from '../../schema';
 import transformations from '../';
 
@@ -16,7 +15,7 @@ const transformationNames = [
 
 describe('schema rules', async () => {
 	for (const transform of transformationNames) {
-		describe(`${toCamel(transform)}()`, () => {
+		describe(`${transform}()`, () => {
 			it(transform, async () => {
 				const testDir = resolve(__dirname, transform);
 				const input = await readYaml(resolve(testDir, 'input.yml'));
@@ -33,7 +32,3 @@ describe('schema rules', async () => {
 		});
 	}
 });
-
-const applyTransformation = function(transformationName, input) {
-	return;
-};
