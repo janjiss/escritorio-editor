@@ -4,7 +4,7 @@ class StateChanges {
 	}
 
 	toggleMark = type => {
-		console.log(this.getState());
+		return this.getState().transform().addMark({ type: type }).apply();
 	};
 }
 
