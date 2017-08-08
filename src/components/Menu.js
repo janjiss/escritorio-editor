@@ -6,9 +6,15 @@ class Menu extends Component {
 
 		return (
 			<div>
-				<span onClick={stateChanges.toggleMark.bind('bold')}>B </span>
-				<span onClick={stateChanges.toggleMark.bind('italic')}>I </span>
-				<span onClick={stateChanges.toggleMark.bind('underline')}>U </span>
+				<span type="bold" onMouseDown={stateChanges.addMark}>
+					B{' '}
+				</span>
+				<span type="italic" onMouseDown={stateChanges.addMark}>
+					I{' '}
+				</span>
+				<span type="underline" onMouseDown={stateChanges.addMark}>
+					U{' '}
+				</span>
 			</div>
 		);
 	}

@@ -26,7 +26,10 @@ const initialState = Raw.deserialize(
 class App extends Component {
 	constructor(props) {
 		super(props);
-		this.stateChanges = new StateChanges({ getState: this.getState });
+		this.stateChanges = new StateChanges({
+			getState: this.getState,
+			onChange: this.onChange
+		});
 	}
 
 	state = {

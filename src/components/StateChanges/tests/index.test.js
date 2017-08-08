@@ -4,7 +4,7 @@ import { Schema, Raw } from 'slate';
 import fs from 'fs-promise';
 import schema from '../../schema';
 
-const testFolders = ['toggleMark'];
+const testFolders = ['addMark'];
 
 describe('schema rules', async () => {
 	for (const testFolder of testFolders) {
@@ -14,11 +14,11 @@ describe('schema rules', async () => {
 				const input = await readYaml(resolve(testDir, 'input.yml'));
 				const expected = await readYaml(resolve(testDir, 'output.yml'));
 
-				const action = require(resolve(testDir, 'setup')).default;
+				const prepare = require(resolve(testDir, 'prepare')).default;
 
 				const state = Raw.deserialize(input, { terse: true });
-				const transformedState = action(state);
-				const output = Raw.serialize(transformedState, { terse: true });
+				const preparedState = prepare(state);
+				const output = Raw.serialize(preparedState, { terse: true });
 				expect(output).toEqual(expected);
 			});
 		});

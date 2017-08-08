@@ -1,10 +1,14 @@
 class StateChanges {
 	constructor(props) {
 		this.getState = props.getState;
+		this.onChange = props.onChange;
 	}
 
-	toggleMark = type => {
-		return this.getState().transform().addMark({ type: type }).apply();
+	addMark = e => {
+		e.preventDefault();
+		const { value } = e.target.attributes.type;
+		const state = this.getState().transform().addMark({ type: value }).apply();
+		this.onChange(state);
 	};
 }
 
