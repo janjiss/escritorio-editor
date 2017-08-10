@@ -1,30 +1,25 @@
-import StateChanges from '../../';
-import { transform } from 'slate';
+import StateChanges from "../../"
+import { transform } from "slate"
 
 export default state => {
-	let newState = null;
+  let newState = null
 
-	const stateChanges = new StateChanges({
-		getState: () => {
-			// Select appropriate paragraph node and create selection
+  const stateChanges = new StateChanges({
+    getState: () => {
+      // Select appropriate paragraph node and create selection
 
-			const paragraphNode = state.document.nodes.get(1);
-			return state
-				.transform()
-				.collapseToStartOf(paragraphNode)
-				.move(5)
-				.extend(3)
-				.apply();
-		},
-		onChange: updatedState => {
-			newState = updatedState;
-		}
-	});
+      const paragraphNode = state.document.nodes.get(1)
+      return state.transform().collapseToStartOf(paragraphNode).move(5).extend(3).apply()
+    },
+    onChange: updatedState => {
+      newState = updatedState
+    }
+  })
 
-	stateChanges.addMark({
-		target: { attributes: { type: { value: 'underline' } } },
-		preventDefault: () => {}
-	});
+  stateChanges.addMark({
+    target: { attributes: { type: { value: "underline" } } },
+    preventDefault: () => {}
+  })
 
-	return newState;
-};
+  return newState
+}
