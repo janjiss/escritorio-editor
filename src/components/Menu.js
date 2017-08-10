@@ -6,14 +6,33 @@ class Menu extends Component {
 
     return (
       <div>
-        <span type="bold" onMouseDown={stateChanges.addMark}>
+        <span
+          onMouseDown={e => {
+            stateChanges.addMark("bold", e)
+          }}
+        >
           B{" "}
         </span>
-        <span type="italic" onMouseDown={stateChanges.addMark}>
+        <span
+          onMouseDown={e => {
+            stateChanges.addMark("italic", e)
+          }}
+        >
           I{" "}
         </span>
-        <span type="underline" onMouseDown={stateChanges.addMark}>
+        <span
+          onMouseDown={e => {
+            stateChanges.addMark("underline", e)
+          }}
+        >
           U{" "}
+        </span>
+        <span
+          onMouseDown={e => {
+            stateChanges.addUnorderedList(e)
+          }}
+        >
+          UL{" "}
         </span>
       </div>
     )

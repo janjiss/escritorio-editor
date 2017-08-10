@@ -16,7 +16,7 @@ export default state => {
     }
   })
 
-  stateChanges.addMark("underline", {
+  stateChanges.addUnorderedList({
     preventDefault: () => {}
   })
 

@@ -4,7 +4,7 @@ import { Schema, Raw } from "slate"
 import fs from "fs-promise"
 import schema from "../../schema"
 
-const testFolders = ["addMark"]
+const testFolders = ["addMark", "addUnorderedList"]
 
 describe("schema rules", async () => {
   for (const testFolder of testFolders) {
