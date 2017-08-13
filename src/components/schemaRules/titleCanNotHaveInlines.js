@@ -8,8 +8,6 @@ export default {
     return !titleBlock.getInlines().isEmpty()
   },
   normalize: (transform, titleBlock) => {
-    transform.unwrapInlineByKey(titleBlock.key)
-
-    return transform
+    return transform.unwrapInlineByKey(titleBlock.key)
   }
 }

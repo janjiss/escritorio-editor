@@ -5,7 +5,7 @@ export default {
   match: node => node.kind === "document",
   validate: document => (document.nodes.size < 2 ? true : null),
   normalize: (transform, document) => {
-    const paragraph = Block.create({ type: "paragraph", data: {} })
-    return transform.insertNodeByKey(document.key, 1, paragraph)
+    const emprtyParagraph = Block.create({ type: "paragraph", data: {} })
+    return transform.insertNodeByKey(document.key, 1, emprtyParagraph)
   }
 }

@@ -7,11 +7,8 @@ export default {
     return invalidChildren.size ? invalidChildren : null
   },
   normalize: (transform, document, invalidChildren) => {
-    let updatedTransform = transform
-    invalidChildren.forEach(child => {
-      updatedTransform = transform.setNodeByKey(child.key, "paragraph")
-    })
-
-    return updatedTransform
+    return invalidChildren.reduce((acc, child) => {
+      acc.setNodeByKey(child.key, "paragraph")
+    }, transform)
   }
 }
