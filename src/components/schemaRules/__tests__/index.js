@@ -10,7 +10,8 @@ const transformationNames = [
   "removeAllTitleBlocksExceptFirst",
   "insertAtLeastOneParagraph",
   "titleCanNotHaveMarks",
-  "titleCanNotHaveInlines"
+  "titleCanNotHaveInlines",
+  "changeOrphanedListItemsToParagraph"
 ]
 
 describe("schema rules", async () => {
