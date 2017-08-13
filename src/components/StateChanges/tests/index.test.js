@@ -17,7 +17,7 @@ describe("schema rules", async () => {
         const prepare = require(resolve(testDir, "prepare")).default
 
         const state = Raw.deserialize(input, { terse: true })
-        const preparedState = prepare(state)
+        const preparedState = prepare(state).transform().normalize(Schema.create(schema)).apply()
         const output = Raw.serialize(preparedState, { terse: true })
         expect(output).toEqual(expected)
       })
