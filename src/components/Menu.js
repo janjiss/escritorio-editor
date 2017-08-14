@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import compose from "./compose"
-import { addMark } from "./StateChanges"
+import { addMark, setBlock, addUnorderedList } from "./StateChanges"
 
 class Menu extends Component {
   getState = () => {
@@ -16,6 +16,22 @@ class Menu extends Component {
           }}
         >
           B
+        </span>
+        <span
+          onMouseDown={e => {
+            e.preventDefault()
+            compose(this.props.onChange, setBlock.bind(null, "headerOne"), this.getState)()
+          }}
+        >
+          H1
+        </span>
+        <span
+          onMouseDown={e => {
+            e.preventDefault()
+            compose(this.props.onChange, addUnorderedList, this.getState)()
+          }}
+        >
+          UL
         </span>
       </div>
     )
