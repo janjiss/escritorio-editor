@@ -8,7 +8,7 @@ export default {
   },
   normalize: (transform, document, invalidChildren) => {
     return invalidChildren.reduce((acc, child) => {
-      acc.setNodeByKey(child.key, "paragraph")
+      return acc.setNodeByKey(child.key, "paragraph")
     }, transform)
   }
 }
