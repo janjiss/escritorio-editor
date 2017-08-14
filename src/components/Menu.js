@@ -1,38 +1,21 @@
 import React, { Component } from "react"
+import compose from "./compose"
+import { addMark } from "./StateChanges"
 
 class Menu extends Component {
-  render() {
-    const { stateChanges } = this.props
-
+  getState = () => {
+    return this.props.state
+  }
+  render = () => {
     return (
       <div>
         <span
           onMouseDown={e => {
-            stateChanges.addMark("bold", e)
+            e.preventDefault()
+            compose(this.props.onChange, addMark.bind(null, "bold"), this.getState)()
           }}
         >
-          B{" "}
-        </span>
-        <span
-          onMouseDown={e => {
-            stateChanges.addMark("italic", e)
-          }}
-        >
-          I{" "}
-        </span>
-        <span
-          onMouseDown={e => {
-            stateChanges.addMark("underline", e)
-          }}
-        >
-          U{" "}
-        </span>
-        <span
-          onMouseDown={e => {
-            stateChanges.addUnorderedList(e)
-          }}
-        >
-          UL{" "}
+          B
         </span>
       </div>
     )

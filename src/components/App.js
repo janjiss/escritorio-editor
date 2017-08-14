@@ -3,7 +3,6 @@ import { Editor, Raw } from "slate"
 import "./App.css"
 import schema from "./schema"
 import Menu from "./Menu"
-import StateChanges from "./StateChanges"
 
 const initialState = Raw.deserialize(
   {
@@ -24,14 +23,6 @@ const initialState = Raw.deserialize(
 )
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.stateChanges = new StateChanges({
-      getState: this.getState,
-      onChange: this.onChange
-    })
-  }
-
   state = {
     state: initialState
   }
@@ -47,7 +38,7 @@ class App extends Component {
   render() {
     return (
       <div id="editor">
-        <Menu stateChanges={this.stateChanges} />
+        <Menu onChange={this.onChange} state={this.state.state} />
         <Editor placeholder="Start typing" schema={schema} state={this.state.state} onChange={this.onChange} />
       </div>
     )

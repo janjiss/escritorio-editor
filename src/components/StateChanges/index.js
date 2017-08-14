@@ -1,24 +1,15 @@
-class StateChanges {
-  constructor(props) {
-    this.getState = props.getState
-    this.onChange = props.onChange
-  }
-
-  addMark = (type, e) => {
-    e.preventDefault()
-    const state = this.getState().transform().addMark({ type: type }).apply()
-    this.onChange(state)
-  }
-
-  addUnorderedList = e => {
-    e.preventDefault()
-    const state = this.getState()
-      .transform()
-      .wrapBlock({ type: "unorderedList" })
-      .setBlock({ type: "listItem" })
-      .apply()
-    this.onChange(state)
-  }
+export const addMark = (type, state) => {
+  return state.transform().addMark({ type: type }).apply()
 }
 
-export default StateChanges
+export const addUnorderedList = state => {
+  return state.transform().wrapBlock({ type: "unorderedList" }).setBlock({ type: "listItem" }).apply()
+}
+
+export const addOrderedList = state => {
+  return state.transform().wrapBlock({ type: "orderedList" }).setBlock({ type: "listItem" }).apply()
+}
+
+export const setBlock = (type, state) => {
+  return state.transform().unwrapBlock().setBlock({ type: type }).apply()
+}

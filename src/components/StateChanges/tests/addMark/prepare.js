@@ -1,24 +1,8 @@
-import StateChanges from "../../"
+import { addMark } from "../../"
 import { transform } from "slate"
 
 export default state => {
-  let newState = null
-
-  const stateChanges = new StateChanges({
-    getState: () => {
-      // Select appropriate paragraph node and create selection
-
-      const paragraphNode = state.document.nodes.get(1)
-      return state.transform().collapseToStartOf(paragraphNode).move(5).extend(3).apply()
-    },
-    onChange: updatedState => {
-      newState = updatedState
-    }
-  })
-
-  stateChanges.addMark("underline", {
-    preventDefault: () => {}
-  })
-
-  return newState
+  const paragraphNode = state.document.nodes.get(1)
+  const newState = state.transform().collapseToStartOf(paragraphNode).move(5).extend(3).apply()
+  return addMark("underline", newState)
 }
