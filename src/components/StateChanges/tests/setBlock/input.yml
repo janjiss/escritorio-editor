@@ -1,24 +1,27 @@
 nodes:
-    - kind: 'block'
-      type: 'title'
+  - kind: block
+    type: title
+    nodes:
+    - kind: text
+      text: A title
+  - kind: block
+    type: paragraph
+    nodes:
+    - kind: text
+      text: regular text
+  - kind: block
+    type: unorderedList
+    nodes:
+    - kind: block
+      type: listItem
       nodes:
+      - kind: text
+        text: unordered list first item
+    - kind: block
+      type: unorderedList
+      nodes:
+      - kind: block
+        type: listItem
+        nodes:
         - kind: text
-          text: hello
-    - kind: 'block'
-      type: 'paragraph'
-      nodes:
-        - kind: 'text'
-          text: 'This is paragraph'
-    - kind: 'block'
-      type: 'unorderedList'
-      nodes:
-        - kind: 'block'
-          type: 'listItem'
-          nodes:
-            - kind: 'text'
-              text: 'Hello from list item'
-        - kind: 'block'
-          type: 'listItem'
-          nodes:
-            - kind: 'text'
-              text: 'Hello from list item'
+          text: unordered list multilevel
