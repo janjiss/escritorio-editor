@@ -11,5 +11,14 @@ export const addOrderedList = state => {
 }
 
 export const setBlock = (type, state) => {
-  return state.transform().unwrapBlock().setBlock({ type: type }).apply()
+  const transform = state.transform()
+  const blocksToUnwrap = state.document.getBlocksAtRange(state.selection)
+
+  blocksToUnwrap.forEach(block => {
+    for (var i = 0; i < state.document.getDepth(block.key); i++) {
+      transform.unwrapBlockByKey(block.key)
+    }
+  })
+
+  return transform.setBlock({ type: type }).apply()
 }

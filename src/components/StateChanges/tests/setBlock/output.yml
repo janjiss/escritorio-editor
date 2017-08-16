@@ -1,21 +1,21 @@
 nodes:
-- kind: block
-  type: title
-  nodes:
-  - kind: text
-    text: A title
-- kind: block
-  type: headerOne
-  nodes:
-  - kind: text
-    text: regular text
-- kind: block
-  type: headerOne
-  nodes:
-  - kind: text
-    text: unordered list first item
-- kind: block
-  type: headerOne
-  nodes:
-  - kind: text
-    text: unordered list multilevel
+  - kind: block
+    type: title
+    nodes:
+      - kind: text
+        text: A title
+  - kind: block
+    type: headerOne
+    nodes:
+      - kind: text
+        text: regular text
+  - kind: block
+    type: headerOne
+    nodes:
+      - kind: text
+        text: unordered list first item
+  - kind: block
+    type: headerOne
+    nodes:
+      - kind: text
+        text: unordered list multilevel
