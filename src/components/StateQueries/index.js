@@ -9,3 +9,9 @@ export const hasBlock = (type, state) => {
 
   return hasParentOfType || isSameType
 }
+
+export const hasMark = (type, state) => {
+  return state.marks.some(mark => {
+    return mark.type === type
+  })
+}
