@@ -1,9 +1,7 @@
 import readYaml from "read-yaml-promise"
 import { resolve } from "path"
 import { Schema, Raw } from "slate"
-import fs from "fs-promise"
 import schema from "../../schema"
-import transformations from "../"
 
 const transformationNames = [
   "transformFirstLineToTitle",
@@ -19,8 +17,10 @@ describe("schema rules", async () => {
     describe(`${transform}()`, () => {
       it(transform, async () => {
         const testDir = resolve(__dirname, transform)
-        const input = await readYaml(resolve(testDir, "input.yml"))
-        const expected = await readYaml(resolve(testDir, "output.yml"))
+        const [input, expected] = await Promise.all([
+          readYaml(resolve(testDir, "input.yml")),
+          readYaml(resolve(testDir, "output.yml"))
+        ])
 
         const state = Raw.deserialize(input, { terse: true })
         const transformedState = state.transform().normalize(Schema.create(schema)).apply()

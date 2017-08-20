@@ -3,19 +3,21 @@ export const addMark = (type, state) => {
 }
 
 export const addUnorderedList = state => {
-  return state.transform().wrapBlock({ type: "unorderedList" }).setBlock({ type: "listItem" }).apply()
+  return setBlock("listItem", state).transform().wrapBlock({ type: "unorderedList" }).apply()
 }
 
 export const addOrderedList = state => {
-  return state.transform().wrapBlock({ type: "orderedList" }).setBlock({ type: "listItem" }).apply()
+  return setBlock("listItem", state).transform().wrapBlock({ type: "orderedList" }).apply()
 }
 
 export const setBlock = (type, state) => {
   const transform = state.transform()
+
   const blocksToUnwrap = state.document.getBlocksAtRange(state.selection)
 
   blocksToUnwrap.forEach(block => {
-    for (var i = 0; i < state.document.getDepth(block.key); i++) {
+    const depth = state.document.getDepth(block.key)
+    for (var i = 0; i < depth; i++) {
       transform.unwrapBlockByKey(block.key)
     }
   })
