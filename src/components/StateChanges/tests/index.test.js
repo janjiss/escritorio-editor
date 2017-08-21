@@ -3,7 +3,7 @@ import { resolve } from "path"
 import { Schema, Raw } from "slate"
 import schema from "../../schema"
 
-const testFolders = ["addMark", "addUnorderedList", "addOrderedList", "setBlock"]
+const testFolders = ["addMark", "removeMark", "addUnorderedList", "addOrderedList", "setBlock"]
 
 describe("State changes", async () => {
   for (const testFolder of testFolders) {

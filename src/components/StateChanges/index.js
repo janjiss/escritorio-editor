@@ -24,3 +24,7 @@ export const setBlock = (type, state) => {
 
   return transform.setBlock({ type: type }).apply()
 }
+
+export const removeMark = (type, state) => {
+  return state.transform().removeMark(type).apply()
+}

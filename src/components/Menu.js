@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import compose from "./compose"
-import { addMark, setBlock, addUnorderedList } from "./StateChanges"
+import { addMark, setBlock, addUnorderedList, removeMark } from "./StateChanges"
 import { hasMark, hasBlock } from "./StateQueries"
 
 class Menu extends Component {
@@ -17,6 +17,7 @@ class Menu extends Component {
             e.preventDefault()
 
             if (hasMark("bold", this.getState())) {
+              compose(this.props.onChange, removeMark.bind(null, "bold"), this.getState)()
             } else {
               compose(this.props.onChange, addMark.bind(null, "bold"), this.getState)()
             }
