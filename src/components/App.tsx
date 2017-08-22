@@ -1,10 +1,10 @@
-import React, { Component } from "react"
-import { Editor, Raw } from "slate"
+import * as React from "react"
 import "./App.css"
 import schema from "./schema"
 import Menu from "./Menu"
+import * as Slate from "slate"
 
-const initialState = Raw.deserialize(
+const initialState = Slate.Raw.deserialize(
   {
     nodes: [
       {
@@ -22,24 +22,20 @@ const initialState = Raw.deserialize(
   { terse: true }
 )
 
-class App extends Component {
+class App extends React.Component<object, object> {
   state = {
     state: initialState
   }
 
-  onChange = state => {
+  onChange = (state: Slate.State) => {
     this.setState({ state })
   }
 
-  getState = () => {
-    return this.state.state
-  }
-
-  render() {
+  public render() {
     return (
       <div id="editor">
         <Menu onChange={this.onChange} state={this.state.state} />
-        <Editor placeholder="Start typing" schema={schema} state={this.state.state} onChange={this.onChange} />
+        <Slate.Editor placeholder="Start typing" schema={schema} state={this.state.state} onChange={this.onChange} />
       </div>
     )
   }
