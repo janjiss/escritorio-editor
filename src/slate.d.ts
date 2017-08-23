@@ -1,34 +1,46 @@
-declare module "slate" {
-  import * as Immutable from "immutable"
+/// <reference path="../node_modules/immutable/dist/immutable.d.ts" />
 
-  interface Node {
+declare namespace SlateJS {
+  class Node {
     key: string
     type: string
+    kind: string
+    text: string
+    nodes: Immutable.List<Node>
+    getInlines(): Immutable.List<Node>
+    getMarks(): Immutable.Set<Mark>
     getBlocksAtRange(range: Selection): Immutable.List<Node>
     getClosest(key: string | Node, match: (node: Node) => boolean): Node | void
     getDepth(key: string): number
   }
 
-  interface Block extends Node {
+  class Block extends Node {
+    static create({ type, data }: { type: string; data: object }): Block
     data: Immutable.Map<string, any>
   }
+  //export const Block: IBlock
 
-  interface Mark extends Node {}
+  class Mark extends Node {}
 
-  interface Document extends Node {}
+  class Inline extends Node {}
 
-  interface Selection {}
+  class Document extends Node {}
 
-  interface Transform {
-    unwrapBlockByKey(key: string): Transform
+  class Selection {}
+
+  class Transform {
+    insertNodeByKey(key: string, index: number, block: Node): Transform
+    unwrapBlockByKey(key: string, properties?: object): Transform
     addMark({ type }: { type: string }): Transform
     removeMark(key: string): Transform
     setBlock({ type }: { type: string }): Transform
     wrapBlock({ type }: { type: string }): Transform
+    setNodeByKey(key: string, type: string): Transform
+    unwrapInlineByKey(key: string): Transform
+    removeMarkByKey(key: string, offset: number, length: number, mark: Mark, options?: object): Transform
     apply(): State
   }
-
-  interface State {
+  class State {
     blocks: Immutable.List<Block>
     document: Document
     marks: Immutable.List<Mark>
@@ -36,9 +48,13 @@ declare module "slate" {
     selection: Selection
   }
 
-  namespace Raw {
-    function deserialize(rawState: object, options?: object): any
+  class Raw {
+    static deserialize(rawState: object, options?: object): any
   }
 
   class Editor extends React.Component<any, any> {}
+}
+
+declare module "slate" {
+  export = SlateJS
 }
