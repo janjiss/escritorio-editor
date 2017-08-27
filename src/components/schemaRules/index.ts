@@ -4,6 +4,7 @@ import transformFirstLineToTitle from "./transformFirstLineToTitle"
 import titleCanNotHaveMarks from "./titleCanNotHaveMarks"
 import titleCanNotHaveInlines from "./titleCanNotHaveInlines"
 import changeOrphanedListItemsToParagraph from "./changeOrphanedListItemsToParagraph"
+import joinLists from "./joinLists"
 
 export default [
   insertAtLeastOneParagraph,
@@ -11,5 +12,6 @@ export default [
   transformFirstLineToTitle,
   titleCanNotHaveInlines,
   titleCanNotHaveMarks,
-  changeOrphanedListItemsToParagraph
+  changeOrphanedListItemsToParagraph,
+  joinLists
 ]

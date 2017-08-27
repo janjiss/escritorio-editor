@@ -9,7 +9,8 @@ const transformationNames = [
   "insertAtLeastOneParagraph",
   "titleCanNotHaveMarks",
   "titleCanNotHaveInlines",
-  "changeOrphanedListItemsToParagraph"
+  "changeOrphanedListItemsToParagraph",
+  "joinLists"
 ]
 
 describe("schema rules", async () => {

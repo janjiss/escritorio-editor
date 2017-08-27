@@ -47,6 +47,8 @@ declare namespace SlateJS {
     unwrapInlineByKey(key: string): Transform
     splitBlock(depth: number): Transform
     splitNodeByKey(key: string, offset: number): Transform
+    moveNodeByKey(key: string, newKey: string, newIndex: number): Transform
+    removeNodeByKey(key: string): Transform
     collapseToStartOfNextBlock(): Transform
     removeMarkByKey(key: string, offset: number, length: number, mark: Mark, options?: object): Transform
     apply(): State

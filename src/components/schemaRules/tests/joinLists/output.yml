@@ -1,0 +1,32 @@
+nodes:
+    - kind: 'block'
+      type: 'title'
+      nodes:
+          - kind: 'text'
+            text: 'A line of text in a paragraph.'
+    - kind: 'block'
+      type: 'unorderedList'
+      nodes:
+          - kind: 'block'
+            type: 'listItem'
+            nodes:
+                - kind: 'text'
+                  text: ''
+          - kind: 'block'
+            type: 'listItem'
+            nodes:
+                - kind: 'text'
+                  text: ''
+    - kind: 'block'
+      type: 'orderedList'
+      nodes:
+          - kind: 'block'
+            type: 'listItem'
+            nodes:
+                - kind: 'text'
+                  text: ''
+          - kind: 'block'
+            type: 'listItem'
+            nodes:
+                - kind: 'text'
+                  text: ''
