@@ -3,6 +3,7 @@ import "./App.css"
 import schema from "./schema"
 import Menu from "./Menu"
 import * as Slate from "slate"
+import plugins from "./plugins"
 
 const initialState = Slate.Raw.deserialize(
   {
@@ -14,6 +15,42 @@ const initialState = Slate.Raw.deserialize(
           {
             kind: "text",
             text: "A line of text in a paragraph."
+          }
+        ]
+      },
+      {
+        kind: "block",
+        type: "unorderedList",
+        nodes: [
+          {
+            kind: "block",
+            type: "listItem",
+            nodes: [
+              {
+                kind: "text",
+                text: "Hello from list tiem"
+              }
+            ]
+          },
+          {
+            kind: "block",
+            type: "listItem",
+            nodes: [
+              {
+                kind: "text",
+                text: "Hello from list tiem"
+              }
+            ]
+          },
+          {
+            kind: "block",
+            type: "listItem",
+            nodes: [
+              {
+                kind: "text",
+                text: "Hello from list tiem"
+              }
+            ]
           }
         ]
       }
@@ -35,7 +72,13 @@ class App extends React.Component<object, object> {
     return (
       <div id="editor">
         <Menu onChange={this.onChange} state={this.state.state} />
-        <Slate.Editor placeholder="Start typing" schema={schema} state={this.state.state} onChange={this.onChange} />
+        <Slate.Editor
+          plugins={plugins}
+          placeholder="Start typing"
+          schema={schema}
+          state={this.state.state}
+          onChange={this.onChange}
+        />
       </div>
     )
   }

@@ -1,32 +1,30 @@
-import * as Slate from "slate";
+import * as Slate from "slate"
 
-export const addMark = (type: string, state: Slate.State) => {
+export const addMark = (type: MarkType, state: Slate.State): Slate.State => {
   return state.transform().addMark({ type: type }).apply()
 }
 
-export const addUnorderedList = (state: Slate.State) => {
-  return setBlock("listItem", state).transform().wrapBlock({ type: "unorderedList" }).apply()
+export const addList = (parentType: BlockType, state: Slate.State): Slate.State => {
+  return setBlock("listItem", state).transform().wrapBlock({ type: parentType }).apply()
 }
 
-export const addOrderedList = (state: Slate.State) => {
-  return setBlock("listItem", state).transform().wrapBlock({ type: "orderedList" }).apply()
-}
-
-export const setBlock = (type: string, state: Slate.State) => {
+export const setBlock = (type: BlockType, state: Slate.State): Slate.State => {
   const transform = state.transform()
 
   const blocksToUnwrap = state.document.getBlocksAtRange(state.selection)
 
+  transform.setBlock({ type: type })
+
   blocksToUnwrap.forEach((block: Slate.Block) => {
     const depth = state.document.getDepth(block.key)
-    for (var i = 0; i < depth; i++) {
+    for (var i = 1; i < depth; i++) {
       transform.unwrapBlockByKey(block.key)
     }
   })
 
-  return transform.setBlock({ type: type }).apply()
+  return transform.apply()
 }
 
-export const removeMark = (type: string, state: Slate.State) => {
+export const removeMark = (type: MarkType, state: Slate.State): Slate.State => {
   return state.transform().removeMark(type).apply()
 }

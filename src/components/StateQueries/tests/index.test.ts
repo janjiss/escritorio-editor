@@ -1,4 +1,4 @@
-import readYaml from "read-yaml-promise"
+import readYaml from "../../../read-yaml-promise"
 import { resolve } from "path"
 import { Raw } from "slate"
 import { hasBlock, hasMark } from "../index"

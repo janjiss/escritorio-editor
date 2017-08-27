@@ -6,9 +6,12 @@ declare namespace SlateJS {
     type: string
     kind: string
     text: string
+    length: number
     nodes: Immutable.List<Node>
     getInlines(): Immutable.List<Node>
     getMarks(): Immutable.Set<Mark>
+    getNextSibling(key: string): Node
+    getPreviousSibling(key: string): Node
     getBlocksAtRange(range: Selection): Immutable.List<Node>
     getClosest(key: string | Node, match: (node: Node) => boolean): Node | void
     getDepth(key: string): number
@@ -31,16 +34,33 @@ declare namespace SlateJS {
   class Transform {
     insertNodeByKey(key: string, index: number, block: Node): Transform
     unwrapBlockByKey(key: string, properties?: object): Transform
+    collapseToStartOf(node: Node): Transform
+    move(position: number): Transform
+    extendToEndOf(node: Node): Transform
+    extend(position: number): Transform
     addMark({ type }: { type: string }): Transform
     removeMark(key: string): Transform
     setBlock({ type }: { type: string }): Transform
     wrapBlock({ type }: { type: string }): Transform
+    unwrapBlock(): Transform
     setNodeByKey(key: string, type: string): Transform
     unwrapInlineByKey(key: string): Transform
+    splitBlock(depth: number): Transform
+    splitNodeByKey(key: string, offset: number): Transform
+    collapseToStartOfNextBlock(): Transform
     removeMarkByKey(key: string, offset: number, length: number, mark: Mark, options?: object): Transform
     apply(): State
   }
+
+  class Schema {
+    static create(schema: Schema): any
+  }
+
   class State {
+    startOffset: number
+    focusBlock: Block
+    endBlock: Block
+    isExpanded: boolean
     blocks: Immutable.List<Block>
     document: Document
     marks: Immutable.List<Mark>
@@ -49,6 +69,7 @@ declare namespace SlateJS {
   }
 
   class Raw {
+    static serialize(state: State, options?: object): object
     static deserialize(rawState: object, options?: object): any
   }
 

@@ -1,7 +1,7 @@
 import * as React from "react"
 import * as Slate from "slate"
 import compose from "./compose"
-import { setBlock, addUnorderedList, removeMark, addMark } from "./StateChanges"
+import { setBlock, addList, removeMark, addMark } from "./StateChanges"
 import { hasBlock, hasMark } from "./StateQueries"
 
 interface MenuProps {
@@ -21,51 +21,69 @@ class Menu extends React.Component<MenuProps, MenuState> {
   render() {
     return (
       <div>
-        <span style={this.renderActiveMarkClass("bold")} onMouseDown={this.handleBoldButton}>
-          B
+        <span style={this.renderActiveMarkClass("bold")} onMouseDown={e => this.handleMarkButton("bold", e)}>
+          {" B "}
         </span>
-        <span style={this.renderActiveBlockClass("headerOne")} onMouseDown={this.handleHeaderOneButton}>
-          H1
+        <span style={this.renderActiveMarkClass("italic")} onMouseDown={e => this.handleMarkButton("italic", e)}>
+          {" I "}
         </span>
-        <span style={this.renderActiveBlockClass("unorderedList")} onMouseDown={this.handleUnorderedListButton}>
-          UL
+        <span style={this.renderActiveMarkClass("underline")} onMouseDown={e => this.handleMarkButton("underline", e)}>
+          {" U "}
+        </span>
+        <span
+          style={this.renderActiveBlockClass("headerOne")}
+          onMouseDown={e => this.handleBlockButton("headerOne", e)}
+        >
+          {" H1 "}
+        </span>
+        <span
+          style={this.renderActiveBlockClass("unorderedList")}
+          onMouseDown={e => this.handleListButton("unorderedList", e)}
+        >
+          {" UL "}
+        </span>
+        <span
+          style={this.renderActiveBlockClass("orderedList")}
+          onMouseDown={e => this.handleListButton("orderedList", e)}
+        >
+          {" OL "}
         </span>
       </div>
     )
   }
 
-  renderActiveBlockClass(blockType: string): object {
+  renderActiveBlockClass(blockType: BlockType): object {
     return hasBlock(blockType, this.getState()) ? { color: "grey" } : {}
   }
 
-  renderActiveMarkClass(markType: string): object {
+  renderActiveMarkClass(markType: MarkType): object {
     return hasMark(markType, this.getState()) ? { color: "grey" } : {}
   }
 
-  handleBoldButton = (event: React.MouseEvent<HTMLElement>) => {
+  handleMarkButton = (markType: MarkType, event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault()
-    if (hasMark("bold", this.getState())) {
-      compose(this.props.onChange, removeMark.bind(null, "bold"), this.getState)()
+    if (hasMark(markType, this.getState())) {
+      compose(this.props.onChange, removeMark.bind(null, markType), this.getState)()
     } else {
-      compose(this.props.onChange, addMark.bind(this, "bold"), this.getState)()
+      compose(this.props.onChange, addMark.bind(this, markType), this.getState)()
     }
   }
 
-  handleHeaderOneButton = (event: React.MouseEvent<HTMLElement>) => {
+  handleListButton = (blockType: BlockType, event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault()
-    if (hasBlock("headerOne", this.getState())) {
+    if (hasBlock(blockType, this.getState())) {
       compose(this.props.onChange, setBlock.bind(null, "paragraph"), this.getState)()
     } else {
-      compose(this.props.onChange, setBlock.bind(this, "headerOne"), this.getState)()
+      compose(this.props.onChange, addList.bind(null, blockType), this.getState)()
     }
   }
 
-  handleUnorderedListButton = (event: React.MouseEvent<HTMLElement>) => {
+  handleBlockButton = (blockType: BlockType, event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault()
-    if (hasBlock("unorderedList", this.getState())) {
+    if (hasBlock(blockType, this.getState())) {
       compose(this.props.onChange, setBlock.bind(null, "paragraph"), this.getState)()
     } else {
-      compose(this.props.onChange, addUnorderedList, this.getState)()
+      compose(this.props.onChange, setBlock.bind(this, blockType), this.getState)()
     }
   }
 }

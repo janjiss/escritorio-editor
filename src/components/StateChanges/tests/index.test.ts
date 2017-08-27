@@ -1,9 +1,9 @@
-import readYaml from "read-yaml-promise"
+import readYaml from "../../../read-yaml-promise"
 import { resolve } from "path"
-import { Schema, Raw } from "slate"
+import * as Slate from "slate"
 import schema from "../../schema"
 
-const testFolders = ["addMark", "removeMark", "addUnorderedList", "addOrderedList", "setBlock"]
+const testFolders = ["addMark", "removeMark", "addList", "setBlock", "setBlockInMiddleOfList"]
 
 describe("State changes", async () => {
   for (const testFolder of testFolders) {
@@ -17,9 +17,9 @@ describe("State changes", async () => {
 
         const prepare = require(resolve(testDir, "prepare")).default
 
-        const state = Raw.deserialize(input, { terse: true })
-        const preparedState = prepare(state).transform().normalize(Schema.create(schema)).apply()
-        const output = Raw.serialize(preparedState, { terse: true })
+        const state = Slate.Raw.deserialize(input, { terse: true })
+        const preparedState = prepare(state).transform().normalize(Slate.Schema.create(schema)).apply()
+        const output = Slate.Raw.serialize(preparedState, { terse: true })
         expect(output).toEqual(expected)
       })
     })

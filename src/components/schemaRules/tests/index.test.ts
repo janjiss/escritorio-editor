@@ -1,4 +1,4 @@
-import readYaml from "read-yaml-promise"
+import readYaml from "../../../read-yaml-promise"
 import { resolve } from "path"
 import { Schema, Raw } from "slate"
 import schema from "../../schema"
